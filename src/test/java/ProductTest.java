@@ -49,6 +49,30 @@ public class ProductTest {
     }
 
     @Test
+    public void shouldSearchByAuthor() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        Product[] actual = manager.searchBy("Peterson");
+        Product[] expected = {item1, item5};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByProducer() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        Product[] actual = manager.searchBy("apple");
+        Product[] expected = {item3};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSearchByTextOnce() {
         manager.add(item1);
         manager.add(item2);
