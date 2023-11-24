@@ -1,7 +1,10 @@
-public class Product {
+public abstract class Product {
+
+
     protected int id;
     protected String name;
     protected int price;
+
     public int getId() {
         return id;
     }
@@ -16,4 +19,10 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    public boolean matches(String search) {
+        return getName().contains(search);
+    }
 }
+
+
