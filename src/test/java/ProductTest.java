@@ -37,6 +37,18 @@ public class ProductTest {
     }
 
     @Test
+    public void shouldGenerateExceptionIfIdDoesNotExist() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repo.removeById(9);
+        });
+    }
+
+    @Test
     public void shouldSearchByTextMult() {
         manager.add(item1);
         manager.add(item2);
@@ -67,9 +79,21 @@ public class ProductTest {
         manager.add(item3);
         manager.add(item4);
         manager.add(item5);
-        Product[] actual = manager.searchBy("racamacafo");
+        Product[] actual = manager.searchBy("rakamakafo");
         Product[] expected = {};
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindById() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        String actual = repo.findById(8);
+        String expected = null;
+        Assertions.assertEquals(expected, actual);
     }
 
 }

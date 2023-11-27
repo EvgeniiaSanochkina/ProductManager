@@ -14,7 +14,22 @@ public class ProductRepository {
         return products;
     }
 
+    public String findById(int id) {
+        Product[] tmp = new Product[1];
+        String result = null;
+        for (Product product : products) {
+            if (product.getId() == id) {
+                tmp[0] = product;
+                result = tmp[0].getName();
+            }
+        }
+        return result;
+    }
+
     public Product[] removeById(int id) {
+        if(findById(id) == null) {
+            throw new NotFoundException("Нету такого айди");
+        }
         Product[] tmp = new Product[products.length - 1];
         int index = 0;
         for (Product product : products) {
