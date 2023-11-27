@@ -96,4 +96,27 @@ public class ProductTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldCheckIfProductIsAlreadySaved() {
+        repo.save(item1);
+        repo.save(item2);
+        repo.save(item3);
+        repo.save(item4);
+        repo.save(item5);
+        String actual = repo.productIsAlreadySaved(5);
+        String expected = "more rules";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCheckIfProductWasNotSaved() {
+        repo.save(item1);
+        repo.save(item2);
+        repo.save(item3);
+        repo.save(item5);
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repo.save(item5);
+        });
+    }
+
 }

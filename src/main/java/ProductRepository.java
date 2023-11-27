@@ -1,7 +1,23 @@
 public class ProductRepository {
     Product[] products = new Product[0];
 
+    public String productIsAlreadySaved(int id) {
+        Product[] tmp = new Product[1];
+        String result = null;
+        for (Product product : products) {
+            if (product.getId() == id) {
+                tmp[0] = product;
+                result = tmp[0].getName();
+            }
+        }
+        return result;
+    }
+
     public void save(Product product) {
+        int id = product.getId();
+        if (productIsAlreadySaved(id) != null) {
+            throw new AlreadyExistsException("Такой товар уже добавлен");
+        }
         Product[] tmp = new Product[products.length + 1];
         for (int i = 0; i < products.length; i++) {
             tmp[i] = products[i];
